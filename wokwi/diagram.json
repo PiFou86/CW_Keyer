@@ -1,0 +1,120 @@
+{
+  "version": 1,
+  "author": "Léon Pierre-François",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "wokwi-arduino-uno", "id": "uno", "top": 48.6, "left": 47.4, "attrs": {} },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn1",
+      "top": -48.6,
+      "left": 300.6,
+      "rotate": 90,
+      "attrs": { "color": "green", "xray": "1", "bounce": "1", "key": "q" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r1",
+      "top": 120,
+      "left": 316.25,
+      "rotate": 90,
+      "attrs": { "value": "1000" }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn2",
+      "top": -48.6,
+      "left": 435,
+      "rotate": 90,
+      "attrs": { "color": "red", "xray": "1", "key": "e" }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn3",
+      "top": -48.6,
+      "left": 377.4,
+      "rotate": 90,
+      "attrs": { "color": "yellow", "xray": "1", "key": "w" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r2",
+      "top": 120,
+      "left": 450.65,
+      "rotate": 90,
+      "attrs": { "value": "1000" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r3",
+      "top": 120,
+      "left": 393.05,
+      "rotate": 90,
+      "attrs": { "value": "1000" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led1",
+      "top": -109.2,
+      "left": 186.2,
+      "attrs": { "color": "red" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led2",
+      "top": -109.2,
+      "left": 205.4,
+      "attrs": { "color": "green" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r4",
+      "top": 4.8,
+      "left": 201.05,
+      "rotate": 90,
+      "attrs": { "value": "680" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r5",
+      "top": 4.8,
+      "left": 181.85,
+      "rotate": 90,
+      "attrs": { "value": "680" }
+    },
+    { "type": "wokwi-potentiometer", "id": "pot1", "top": -68.5, "left": 537.4, "attrs": {} },
+    {
+      "type": "wokwi-buzzer",
+      "id": "bz1",
+      "top": -112.8,
+      "left": 21,
+      "attrs": { "volume": "0.1" }
+    }
+  ],
+  "connections": [
+    [ "uno:5V", "r1:2", "red", [ "v28.7", "h3.8" ] ],
+    [ "btn1:1.r", "r1:1", "green", [ "v0" ] ],
+    [ "uno:2", "btn1:1.r", "green", [ "v-19.2", "h61.7" ] ],
+    [ "btn1:2.l", "uno:GND.1", "green", [ "v0", "h-163.4" ] ],
+    [ "btn3:1.r", "r3:1", "green", [ "v0" ] ],
+    [ "r3:2", "uno:5V", "red", [ "h0", "v114", "h-76.8" ] ],
+    [ "r2:2", "uno:5V", "red", [ "h0", "v114", "h-268.8" ] ],
+    [ "btn2:1.r", "r2:1", "green", [ "v0" ] ],
+    [ "btn3:2.l", "uno:GND.1", "green", [ "v0", "h-201.8" ] ],
+    [ "btn2:2.l", "uno:GND.1", "black", [ "v0", "h-297.8" ] ],
+    [ "btn3:1.r", "uno:3", "gold", [ "v19.4", "h-144" ] ],
+    [ "btn2:1.r", "uno:4", "red", [ "v9.8", "h-211.2" ] ],
+    [ "led1:C", "uno:GND.1", "green", [ "v9.6", "h-38", "v115.2" ] ],
+    [ "led2:C", "uno:GND.1", "black", [ "v9.6", "h-57.5" ] ],
+    [ "r5:2", "uno:9", "green", [ "h0" ] ],
+    [ "r4:2", "uno:8", "green", [ "h0" ] ],
+    [ "led2:A", "r4:1", "green", [ "v0" ] ],
+    [ "led1:A", "r5:1", "green", [ "v0" ] ],
+    [ "pot1:GND", "uno:GND.1", "black", [ "v19.2", "h-38.4", "v-76.8", "h-365.1" ] ],
+    [ "pot1:VCC", "uno:5V", "red", [ "v211.2", "h-0.8", "v57.6", "h-378.2" ] ],
+    [ "uno:A0", "pot1:SIG", "green", [ "v19.1", "h3.8" ] ],
+    [ "bz1:1", "uno:GND.1", "black", [ "v38.4", "h115.2" ] ],
+    [ "bz1:2", "uno:11", "orange", [ "v19.2", "h124.4" ] ]
+  ],
+  "dependencies": {}
+}

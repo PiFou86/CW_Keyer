@@ -5,16 +5,11 @@
 
 Keyer *keyer = nullptr;
 void setup() {
+  Serial.begin(9600);
+  while (!Serial) {
+    ; 
+  }
   keyer = new Keyer();
-
-
-  pinMode(11, OUTPUT);
-
-
-  //pinMode(2, INPUT_PULLUP)
-
-  tone(11, 750, 100000); // Example tone to test the setup
-  //delay(100000); // Wait for a second to hear the tone
 }
 
 void loop() {

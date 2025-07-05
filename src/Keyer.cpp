@@ -2,18 +2,27 @@
 
 #include <Utilify/DigitalInput/PushButton.h>
 
+#include <Utilify/AnalogInput/Potentiometer.h>
+
 #include "Action/ToogleBooleanAction.h"
 #include "Action/SetFalseAction.h"
 #include "Action/SetTrueAction.h"
+#include "Action/WPMAction.h"
 
 Keyer::Keyer()
     : m_dot(nullptr),
       m_dash(nullptr),
-      m_dotPressed(false),
-      m_dashPressed(false),
       m_modeA(nullptr),
+
+      m_wpmSelector(nullptr),
+
       m_isModeA(true),
-      m_wpm(15) {
+
+      m_wpm(15),
+
+      m_dotPressed(false),
+      m_dashPressed(false)
+{
   this->m_dot = new PushButton(2);
   this->m_dash = new PushButton(3);
   this->m_modeA = new PushButton(4);
@@ -27,16 +36,30 @@ Keyer::Keyer()
   ActionBase<void>* modeAAction = new ToggleBooleanAction(m_isModeA);
   this->m_modeA->callbackKeyUp(modeAAction);
   this->m_modeA->callbackKeyDown(modeAAction);
+
+  this->m_wpmSelector = new Potentiometer(A0, new WPMAction(*this));
 }
 
 Keyer::~Keyer() {
   delete m_dot;
   delete m_dash;
+  delete m_modeA;
+  delete m_wpmSelector;
+
+  m_dot = nullptr;
+  m_dash = nullptr;
+  m_modeA = nullptr;
+  m_wpmSelector = nullptr;
+
+  noTone(this->m_pinBuzzer);
+  m_state = State::Idle;
 }
 
 void Keyer::loop() {
   m_dot->tick();
   m_dash->tick();
+  m_modeA->tick();
+  m_wpmSelector->tick();
 
   unsigned long now = millis();
 
@@ -91,7 +114,7 @@ void Keyer::loop() {
   }
 }
 
-void Keyer::wpm(uint8_t speed) { m_wpm = speed; }
+void Keyer::wpm(uint8_t speed) { Serial.println(speed);  m_wpm = speed; }
 
 uint8_t Keyer::wpm() const { return m_wpm; }
 

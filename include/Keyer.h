@@ -3,6 +3,7 @@
 #include <Arduino.h>
 
 class PushButton;
+class Potentiometer;
 class Keyer {
  public:
   Keyer();
@@ -20,6 +21,8 @@ class Keyer {
   PushButton *m_dot;
   PushButton *m_dash;
   PushButton *m_modeA;
+
+  Potentiometer *m_wpmSelector;
 
   bool m_isModeA;
   uint8_t m_wpm = 5;
@@ -45,14 +48,14 @@ class Keyer {
   uint8_t m_pinBuzzer = 11;
 
   // dot duration in milliseconds = (60 * 1000) / (m_wpm * m_dotsPerWord)
-  uint16_t dotDuration() const { return (((uint16_t)60 * 1000) / (m_wpm * m_dotsPerWord)); }
+  inline uint16_t dotDuration() const { return (((uint16_t)60 * 1000) / (m_wpm * m_dotsPerWord)); }
 
-  uint16_t dashDuration() const {
+  inline uint16_t dashDuration() const {
     return dotDuration() * 3;  // Dash is 3 times the dot duration
   }
 
-  uint16_t interCharacterSpaceDuration() const { return dotDuration(); }
+  inline uint16_t interCharacterSpaceDuration() const { return dotDuration(); }
 
-  uint16_t interWordSpaceDuration() const { return dotDuration() * 7; }
-  uint16_t interLetterSpaceDuration() const { return dotDuration() * 3; }
+  inline uint16_t interWordSpaceDuration() const { return dotDuration() * 7; }
+  inline uint16_t interLetterSpaceDuration() const { return dotDuration() * 3; }
 };

@@ -26,7 +26,7 @@ class Keyer {
 
   bool m_isModeA;
   uint8_t m_wpm = 5;
-  // Based on PARIS (.--. .- .-. .. ...), PARIS takes 10 dots and 4 dashes
+  // Based on PARIS (.--. .- .-. .. ...), PARIS takes 10 dots and 4 dashes  (.--. .- .. -.) (.- ..-) (-.-. .... --- -.-. --- .-.. .- -)
   // . . ... . ... . . ... = 14
   // . . ... ... = 8
   // . . ... . . ... = 10
